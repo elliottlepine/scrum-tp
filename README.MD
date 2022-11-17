@@ -1,4 +1,4 @@
-# Sprint 1 - Parseur d’articles scientifiques en format texte (carnet du produit)
+# Sprint 1 - Parseur d’articles scientifiques en format texte
 
 Elliott Lépine, Lyes Douki, Yacine Trousselle
 
@@ -9,3 +9,4 @@ Elliott Lépine, Lyes Douki, Yacine Trousselle
 Voir [comprehension.md](comprehension.md)
 
 ### Planification Sprint (17/11/2022)
+
