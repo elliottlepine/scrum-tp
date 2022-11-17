@@ -2,16 +2,6 @@
 
 ## À faire
 
-### GL-1 Veille techno pdf2text
-
-*Assigné à Elliott et Lyes*
-
-Faire une veille technologique de l'utilitaire pdf2text
-
-Lister les arguments qui semblent intéressant
-
-Ecrire un compte-rendu rapide sur les limites de l'outil.
-
 ### GL-2 Veille techno pdftotext
 
 *Assigné à Yacine*
@@ -23,6 +13,16 @@ Lister les arguments qui semblent intéressant
 Ecrire un compte-rendu rapide sur les limites de l'outil.
 
 ## En cours
+
+### GL-1 Veille techno pdf2text
+
+*Assigné à Elliott et Lyes*
+
+Faire une veille technologique de l'utilitaire pdf2text
+
+Lister les arguments qui semblent intéressant
+
+Ecrire un compte-rendu rapide sur les limites de l'outil.
 
 ## Terminé
 
