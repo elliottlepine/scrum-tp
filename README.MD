@@ -1,10 +1,12 @@
 # Sprint 2 - Parseur d’articles scientifiques en format texte
 
+Repo Github : https://github.com/elliottlepine/scrum-tp/tree/GL-1-Veille-techno-pdf2text
+
 Elliott Lépine, Lyes Douki, Yacine Trousselle
 
 ## Compte rendu
 
-### Analyse du besoin
+### Analyse du besoin (17/11/2022 - 9h)
 
 Voir [comprehension.md](comprehension.md)
 
@@ -16,7 +18,9 @@ Remplissage du backlog avec des tickets atomiques respectant le cahier des charg
 
 Paramétrage du premier sprint.
 
-Tickets GL-1 et GL-2 à faire
+Tickets GL-1 et GL-2 à faire.
+
+Voir [backlog.md](backlog.md)
 
 ### Rétrospective du sprint 1 et planification du sprint 2 (05/12/2022)
 
@@ -26,4 +30,3 @@ Ils passent sur le sprint 2, et on ajoute les tickets GL-4 et le GL-5.
 Le ticket GL-3 est quant à lui annulé.
 
 L'équipe a décidé d'un commun accord de développer le logiciel en Python et d'utiliser l'utilitaire pdftotext, suite à la veille technologique réalisée lors du sprint 1.
-
