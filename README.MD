@@ -38,3 +38,7 @@ L'équipe s'est réunie au bout d'1h30 pour faire le point sur l'avancement des 
 Le choix de l'utilitaire s'est finalement porté sur pdftotext, puisque les essais réalisés avec pdf2text n'étaient pas lisibles lorsque le document contenait 2 colonnes.
 
 Il a été décidé de passer toute l'équipe sur une première implémentation de pdftotext dans l'app Python.
+
+Un Trello a été créé pour pouvoir gérer le backlog de manière plus simple
+
+![Trello](./media/trello.png)
