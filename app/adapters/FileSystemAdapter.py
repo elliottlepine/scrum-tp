@@ -1,4 +1,4 @@
-from models.File import File
+import os
 
 class FileSystemAdapter:
     instance = None
@@ -10,12 +10,18 @@ class FileSystemAdapter:
         
         return FileSystemAdapter.instance
 
-    def open(self, path, read = True, write = False):
+    def create(self, file: File):
+        with open(file.path, 'w') as f:
+            f.write(file.content)
+
+    def read(self, path, read = True, write = False):
         authorization = ""
 
         if (read == True):
             authorization += "r"
 
-        file = open(path, authorization)
 
-        return File(file, read, write)
+        return open(path, authorization)
+
+    def delete(self, path):
+        os.remove(path) 
