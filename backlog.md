@@ -2,28 +2,6 @@
 
 ## À faire
 
-### GL-3 PoC pdf2text
-
-*Assigné à Lyes*
-
-
-**Effecturer GL-1 avant !!**
-
-Concevoir une implémentation sale et rapide de pdf2text pour tester sa pertinence au sein du projet.
-
-Tester le PoC avec les articles fournis par le client.
-
-### GL-4 PoC pdftotext
-
-*Assigné à Yacine*
-
-
-**Effecturer GL-2 avant !!**
-
-Concevoir une implémentation sale et rapide de pdftotext pour tester sa pertinence au sein du projet.
-
-Tester le PoC avec les articles fournis par le client.
-
 ### GL-5 Implémentation de l'utilitaire
 
 *Assigné à Elliott*
@@ -58,6 +36,28 @@ Faire une veille technologique de l'utilitaire pdftotext
 Lister les arguments qui semblent intéressant
 
 Ecrire un compte-rendu rapide sur les limites de l'outil.
+
+### GL-3 PoC pdf2text
+
+*Assigné à Lyes*
+
+
+**Effecturer GL-1 avant !!**
+
+Concevoir une implémentation sale et rapide de pdf2text pour tester sa pertinence au sein du projet.
+
+Tester le PoC avec les articles fournis par le client.
+
+### GL-4 PoC pdftotext
+
+*Assigné à Yacine*
+
+
+**Effecturer GL-2 avant !!**
+
+Concevoir une implémentation sale et rapide de pdftotext pour tester sa pertinence au sein du projet.
+
+Tester le PoC avec les articles fournis par le client.
 
 ## Backlog
 

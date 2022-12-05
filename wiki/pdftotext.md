@@ -52,4 +52,4 @@ Usage: pdftotext [options] <PDF-file> [<text-file>]
 
 ## Infos utiles
 
-
+L'option 'raw' est la plus adaptée  
