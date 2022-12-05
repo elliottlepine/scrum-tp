@@ -1,8 +1,10 @@
 # Gestion du sprint
 
-## Backlog
+## À faire
 
 ### GL-1 Veille techno pdf2text
+
+*Assigné à Elliott et Lyes*
 
 Faire une veille technologique de l'utilitaire pdf2text
 
@@ -12,11 +14,20 @@ Ecrire un compte-rendu rapide sur les limites de l'outil.
 
 ### GL-2 Veille techno pdftotext
 
+*Assigné à Yacine*
+
 Faire une veille technologique de l'utilitaire pdftotext
 
 Lister les arguments qui semblent intéressant
 
 Ecrire un compte-rendu rapide sur les limites de l'outil.
+
+## En cours
+
+## Terminé
+
+
+## Backlog
 
 ### GL-3 PoC pdf2text
 
@@ -74,9 +85,3 @@ Ces media peuvent être :
 - Formules
 - Images
 - Tableaux
-
-## À faire
-
-## En cours
-
-## Terminé

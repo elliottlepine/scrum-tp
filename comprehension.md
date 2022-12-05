@@ -6,4 +6,4 @@ L'utilitaire n'est donc pas seulement un convertisseur, mais également un parse
 
 Le document txt doit prendre en compte les doubles colonnes, les formules mathématiques, les figures.
 
-Le document final devra au minimum contenir le titre, les auteurs, l'introduction et le développement, et accessoirement la conclusion
+Le document final devra au minimum contenir le titre, les auteurs, l'introduction et le développement, et accessoirement la conclusion, le résumé, et la bibliographie
