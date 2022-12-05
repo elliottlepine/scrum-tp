@@ -1,6 +1,7 @@
 from adapters.TerminalAdapter import TerminalAdapter
 from adapters.FileSystemAdapter import FileSystemAdapter
+from adapters.SystemAdapter import SystemAdapter
 
-backlog = FileSystemAdapter.getInstance().open('/home/nas-wks01/users/uapv2102160/Documents/L3/scrum/tp1/backlog.md')
+backlog = FileSystemAdapter.getInstance().open(SystemAdapter.getInstance().getArgv())
 
 TerminalAdapter.basic(backlog.getContent())
