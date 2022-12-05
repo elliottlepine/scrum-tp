@@ -27,6 +27,6 @@ Voir [backlog.md](backlog.md)
 Les tickets du sprint 1 n'étaient pas tout à fait terminés en raison des contraintes de temps.
 
 Ils passent sur le sprint 2, et on ajoute les tickets GL-4 et le GL-5.
-Le ticket GL-3 est quant à lui annulé.
+Le ticket GL-8 est quant à lui annulé.
 
 L'équipe a décidé d'un commun accord de développer le logiciel en Python et d'utiliser l'utilitaire pdftotext, suite à la veille technologique réalisée lors du sprint 1.
