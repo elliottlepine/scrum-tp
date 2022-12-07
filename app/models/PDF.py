@@ -1,5 +1,7 @@
+from adapters.SystemAdapter import SystemAdapter
 from adapters.FileSystemAdapter import FileSystemAdapter
 from models.File import File
+import os
 
 
 class PDF(File):
@@ -17,3 +19,12 @@ class PDF(File):
         abstract = content[abstractStartsAt:abstractEndsAt]
 
         return abstract
+
+    def getFileName() :
+        getNameFromArgs = SystemAdapter.getinstance().getArgv()[1]
+        file_name = os.path.basename(getNameFromArgs) 
+        tmpName = os.path.splitext(file_name)[0]
+        for caractere in tmpName : 
+            if(caractere == " ") : 
+                caractere = "_"
+        return tmpName
