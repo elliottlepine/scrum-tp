@@ -30,3 +30,15 @@ Ils passent sur le sprint 2, et on ajoute les tickets GL-4 et le GL-5.
 Le ticket GL-8 est quant à lui annulé.
 
 L'équipe a décidé d'un commun accord de développer le logiciel en Python et d'utiliser l'utilitaire pdftotext, suite à la veille technologique réalisée lors du sprint 1.
+
+### Simili daily-scrum de mi-séance (05/12/2022)
+
+L'équipe s'est réunie au bout d'1h30 pour faire le point sur l'avancement des tâches respectives.
+
+Le choix de l'utilitaire s'est finalement porté sur pdftotext, puisque les essais réalisés avec pdf2text n'étaient pas lisibles lorsque le document contenait 2 colonnes.
+
+Il a été décidé de passer toute l'équipe sur une première implémentation de pdftotext dans l'app Python.
+
+Un Trello a été créé pour pouvoir gérer le backlog de manière plus simple
+
+![Trello](./media/trello.png)
