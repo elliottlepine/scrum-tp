@@ -1,5 +1,6 @@
 from adapters.FileSystemAdapter import FileSystemAdapter
 
+
 class File:
     def __init__(self, path: str, file):
         self.file = file
@@ -11,7 +12,7 @@ class File:
 
     @staticmethod
     def read(path: str):
-        return File(FileSystemAdapter.getInstance().read(path))
+        return File(path, FileSystemAdapter.getInstance().read(path))
 
     def delete(self):
         FileSystemAdapter.getInstance().delete(self.path)
