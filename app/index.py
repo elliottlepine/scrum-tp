@@ -26,5 +26,5 @@ file.create()
 FileSystemAdapter.getInstance().delete(TEMP_FILE_PATH)
 
 print(file.extractAbstract())
-
-print(file.getFileName())
+tmp = PDF()
+print(tmp.getFileName())
