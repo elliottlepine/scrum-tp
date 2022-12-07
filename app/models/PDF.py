@@ -21,8 +21,12 @@ class PDF(File):
         return abstract
 
     def getFileName(self) :
+        #basename va recuperer le dernier contenue du chemin indiqué par exemple ===> torres.pdf 
+        #argv[1] car on met le chemin vers le fichier pdf dans le premier argument
         file_name = os.path.basename(SystemAdapter.getInstance().getArgv()[1]) 
+        #file_name[0]===>torres
         tmpName = os.path.splitext(file_name)[0]
+        #si eventuellement y a un espace il le transform en _
         for caractere in tmpName : 
             if(caractere == " ") : 
                 caractere = "_"
