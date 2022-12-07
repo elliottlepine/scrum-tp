@@ -2,6 +2,21 @@
 
 ## À faire
 
+### GL-5 Implémentation de l'utilitaire
+
+*Assigné à Elliott*
+
+**Effecturer GL-3 et gl-4 avant !!**
+
+Faire une première vraie implémentation de l'utilitaire le plus pertinent (pdf2text, ou pdftotext)
+
+
+## En cours
+
+
+
+## Terminé
+
 ### GL-1 Veille techno pdf2text
 
 *Assigné à Elliott et Lyes*
@@ -22,14 +37,10 @@ Lister les arguments qui semblent intéressant
 
 Ecrire un compte-rendu rapide sur les limites de l'outil.
 
-## En cours
-
-## Terminé
-
-
-## Backlog
-
 ### GL-3 PoC pdf2text
+
+*Assigné à Lyes*
+
 
 **Effecturer GL-1 avant !!**
 
@@ -39,25 +50,16 @@ Tester le PoC avec les articles fournis par le client.
 
 ### GL-4 PoC pdftotext
 
+*Assigné à Yacine*
+
+
 **Effecturer GL-2 avant !!**
 
 Concevoir une implémentation sale et rapide de pdftotext pour tester sa pertinence au sein du projet.
 
 Tester le PoC avec les articles fournis par le client.
 
-### GL-8 Choisir l'utilitaire
-
-**Effecturer GL-3 et GL-4 avant !!**
-
-*Tout le monde doit être présent*
-
-Examiner les 2 PoC, leurs résultats avec les articles donnés par le client, et choisir l'utilitaire le plus adapté au projet.
-
-### GL-5 Implémentation de l'utilitaire
-
-**Effecturer GL-3 et gl-4 avant !!**
-
-Faire une première vraie implémentation de l'utilitaire le plus pertinent (pdf2text, ou pdftotext)
+## Backlog
 
 ### GL-6 Extraire les informations du PDF
 
@@ -85,3 +87,13 @@ Ces media peuvent être :
 - Formules
 - Images
 - Tableaux
+
+## Annulés
+
+### GL-8 Choisir l'utilitaire
+
+**Effecturer GL-3 et GL-4 avant !!**
+
+*Tout le monde doit être présent*
+
+Examiner les 2 PoC, leurs résultats avec les articles donnés par le client, et choisir l'utilitaire le plus adapté au projet.
