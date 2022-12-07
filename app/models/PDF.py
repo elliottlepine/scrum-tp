@@ -1,5 +1,9 @@
 import File
-
+import os
+import SystemAdapter
 class PDF(File):
-    def __init__(self, file, read: bool, write: bool):
-        super(). __init__()
+   
+    def getFileName(path : str) :
+        getNameFromArgs = SystemAdapter.getInstance().getArgv()[1]
+        
+        return nameOfFile
