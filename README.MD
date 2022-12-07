@@ -1,4 +1,4 @@
-# Sprint 2 - Parseur d’articles scientifiques en format texte
+# Sprint 3 - Parseur d’articles scientifiques en format texte
 
 Repo Github : https://github.com/elliottlepine/scrum-tp/tree/GL-1-Veille-techno-pdf2text
 
@@ -42,3 +42,13 @@ Il a été décidé de passer toute l'équipe sur une première implémentation 
 Un Trello a été créé pour pouvoir gérer le backlog de manière plus simple
 
 ![Trello](./media/trello.png)
+
+### Rétrospective du sprint 2 et planification du sprint 3
+
+Les tâches d'extraction n'ont pas pu être effectuées lors du sprint 2.
+
+Elles ont été trasférées sur le sprint 3, en plus de la tâche de conversion en XML.
+
+Ces changements ont été reportés sur le Trello du projet.
+
+![Trello sprint 3](./media/sprint3.png)
