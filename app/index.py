@@ -26,4 +26,4 @@ file.create()
 FileSystemAdapter.getInstance().delete(TEMP_FILE_PATH)
 
 print(file.extractAbstract())
-print(file.getFileName())
+print(SystemAdapter.getInstance().getArgv[1])
