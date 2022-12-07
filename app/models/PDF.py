@@ -21,7 +21,7 @@ class PDF(File):
         return abstract
 
     def getFileName(self) :
-        file_name = os.path.basename(SystemAdapter.getinstance().getArgv()[1]) 
+        file_name = os.path.basename(SystemAdapter.getInstance().getArgv()[1]) 
         tmpName = os.path.splitext(file_name)[0]
         for caractere in tmpName : 
             if(caractere == " ") : 
