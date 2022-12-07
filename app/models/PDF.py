@@ -20,7 +20,7 @@ class PDF(File):
 
         return abstract
 
-    def getFileName(self) :
+    def extractFileName(self) :
         #basename va recuperer le dernier contenue du chemin indiqué par exemple ===> torres.pdf 
         #argv[1] car on met le chemin vers le fichier pdf dans le premier argument
         file_name = os.path.basename(SystemAdapter.getInstance().getArgv()[1]) 
