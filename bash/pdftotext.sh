@@ -1,6 +1,6 @@
 #!/bin/bash
 
-args=("-raw" "-nodiag" "-raw -nodiag")
+args=("-raw" "-bbox-layout -q -l 1")
 
 for pdf in $(ls CORPUS_TRAIN)
 do
