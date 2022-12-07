@@ -20,7 +20,7 @@ class PDF(File):
 
         return abstract
 
-    def getFileName() :
+    def getFileName(self) :
         getNameFromArgs = SystemAdapter.getinstance().getArgv()[1]
         file_name = os.path.basename(getNameFromArgs) 
         tmpName = os.path.splitext(file_name)[0]
