@@ -10,26 +10,30 @@ class PDF(File):
     def extractAbstract(self):
         content = self.content
 
-        abstractStartsAt = content.find("Abstract")
+        # Split the text into lines
+        lines = content.split("\n")
 
-        print(abstractStartsAt)
+        # Find the index of the first line of the abstract
+        startAbstract = None
+        for i, line in enumerate(lines):
+            if line.startswith("Abstract"):
+                startAbstract = i
+                break
 
-        fromAbstract = content[abstractStartsAt:]
+        # If no lines start with "Abstract", return an empty string
+        if startAbstract is None:
+            return ""
 
-        abstractEndsAt1 = fromAbstract.find("\n1")
-        abstractEndsAtI = fromAbstract.find("\nI.")
+        # Find the index of the last line of the abstract
+        endAbstract = None
+        for i, line in enumerate(lines[startAbstract + 1:], startAbstract + 1):
+            if line.startswith("I. ") or line.startswith("1 "):
+                endAbstract = i
+                break
 
-        if (
-            (abstractEndsAtI < abstractEndsAt1 and 0 < abstractEndsAtI)
-            or abstractEndsAt1 < 0
-        ):
-            abstractEndsAt = abstractEndsAtI
-        else:
-            abstractEndsAt = abstractEndsAt1
+        # If no lines start with "I. " or "1 ", return an empty string
+        if endAbstract is None:
+            return ""
 
-        print(abstractEndsAt)
-
-        abstract = content[abstractStartsAt:abstractEndsAt +
-                           len("\n1 Introduction")]
-
-        return abstract
+        # Return the abstract block by concatenating the individual lines
+        return "\n".join(lines[startAbstract:endAbstract])
