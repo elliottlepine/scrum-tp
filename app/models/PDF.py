@@ -10,10 +10,26 @@ class PDF(File):
     def extractAbstract(self):
         content = self.content
 
-        abstractStartsAt = content.find("ABSTRACT")
+        abstractStartsAt = content.find("Abstract")
 
-        abstractEndsAt = content.find("1")
+        print(abstractStartsAt)
 
-        abstract = content[abstractStartsAt:abstractEndsAt]
+        fromAbstract = content[abstractStartsAt:]
+
+        abstractEndsAt1 = fromAbstract.find("\n1")
+        abstractEndsAtI = fromAbstract.find("\nI.")
+
+        if (
+            (abstractEndsAtI < abstractEndsAt1 and 0 < abstractEndsAtI)
+            or abstractEndsAt1 < 0
+        ):
+            abstractEndsAt = abstractEndsAtI
+        else:
+            abstractEndsAt = abstractEndsAt1
+
+        print(abstractEndsAt)
+
+        abstract = content[abstractStartsAt:abstractEndsAt +
+                           len("\n1 Introduction")]
 
         return abstract
