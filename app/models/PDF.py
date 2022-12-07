@@ -16,7 +16,7 @@ class PDF(File):
         # Find the index of the first line of the abstract
         startAbstract = None
         for i, line in enumerate(lines):
-            if line.startswith("Abstract"):
+            if line.startswith("Abstract") or line.startswith("ABSTRACT"):
                 startAbstract = i
                 break
 
@@ -27,7 +27,12 @@ class PDF(File):
         # Find the index of the last line of the abstract
         endAbstract = None
         for i, line in enumerate(lines[startAbstract + 1:], startAbstract + 1):
-            if line.startswith("I. ") or line.startswith("1 "):
+            if (
+                line.startswith("I. ")
+                or line.startswith("1 ")
+                or line.startswith("1. ")
+                or line.startswith("Introduction")
+            ):
                 endAbstract = i
                 break
 
