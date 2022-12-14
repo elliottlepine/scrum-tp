@@ -1,6 +1,7 @@
 from adapters.SystemAdapter import SystemAdapter
 from adapters.FileSystemAdapter import FileSystemAdapter
 from models.File import File
+from common.runPDFtoText import TEMP_FILE_PATH, runPDFtoText
 import os
 import re
 
@@ -22,7 +23,7 @@ class PDF(File):
         # basename va recuperer le dernier contenue du chemin indiqué par exemple ===> torres.pdf
         # argv[1] car on met le chemin vers le fichier pdf dans le premier argument
         file_name = os.path.basename(
-            SystemAdapter.getInstance().getArguments()['inputPath'])
+            SystemAdapter.getInstance().getArguments().input)
         # file_name[0]===>torres
         tmpName = os.path.splitext(file_name)[0]
         # si eventuellement y a un espace il le transform en _
@@ -74,15 +75,9 @@ class PDF(File):
     # Returns the title of the paper
     ###
     def extractTitle(self):
-        PDFTOTEXT = "pdftotext -bbox-layout -q -l 1"
-        TEMP_FILE_PATH = "./app/tempTitle.txt"
-
-        SystemAdapter.getInstance().runCommand(
-            PDFTOTEXT
-            + " "
-            + SystemAdapter.getInstance().getArguments['inputPath']
-            + " "
-            + TEMP_FILE_PATH
+        runPDFtoText(
+            SystemAdapter.getInstance().getArguments().input,
+            True
         )
 
         file = PDF.read(TEMP_FILE_PATH)
