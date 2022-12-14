@@ -6,11 +6,11 @@ from models.PDF import PDF
 
 PDFTOTEXT = "pdftotext -raw"
 PDFTOTEXTTITLE = "pdftotext -bbox-layout -q -l 1"
-TEMP_FILE_PATH = "/app/temp.txt"
+TEMP_FILE_PATH = "./app/temp.txt"
 
 TerminalAdapter.basic(
     SystemAdapter.getInstance().runCommand(
-        PDFTOTEXTTITLE
+        PDFTOTEXT
         + " "
         + SystemAdapter.getInstance().getArgv()[1]
         + " "
@@ -22,10 +22,8 @@ file = PDF.read(TEMP_FILE_PATH)
 
 file.path = SystemAdapter.getInstance().getArgv()[2]
 
-file.create()
+# file.create()
 
-print(file.get_title())
+file.toTXT().create()
 
 FileSystemAdapter.getInstance().delete(TEMP_FILE_PATH)
-
-print(file.extractAbstract())
