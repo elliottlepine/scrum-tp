@@ -147,9 +147,9 @@ class PDF(File):
     def toXML(self):
         article = etree.Element("Article")
         preamble = etree.SubElement(article, "preamble")
-        preamble.text = self.extractFileName(self)
+        preamble.text = self.extractFileName()
         titre = etree.SubElement(article, "titre")
-        titre.text = self.extractTitle(self)
+        titre.text = self.extractTitle()
         abstract = etree.SubElement(article, "abstract")
-        abstract.text = self.extractAbstract(self)
+        abstract.text = self.extractAbstract()
         
