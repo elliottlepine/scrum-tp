@@ -132,6 +132,8 @@ class PDF(File):
     def extractCorpus(self):
         content = self.content
 
+        print(content)
+
         # Split the text into lines
         lines = content.split("\n")
 
@@ -156,6 +158,9 @@ class PDF(File):
         for i, line in enumerate(lines[startCorpus + 1:], startCorpus + 1):
             if (
                 "Conclusion" in line
+                or "CONCLUSION" in line
+                or "Discussion" in line
+                or "DISCUSSION" in line
             ):
                 endCorpus = i
                 break
