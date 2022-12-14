@@ -5,7 +5,8 @@ from common.runPDFtoText import TEMP_FILE_PATH, runPDFtoText
 import os
 import re
 
-from xml.etree import ElementTree as etree
+from xml.etree import ElementTree as root
+from xml.dom import minidom
 
 class PDF(File):
     def __init__(self, path: str, file):
@@ -145,12 +146,17 @@ class PDF(File):
         return self
 
     def toXML(self):
-        article = etree.Element("Article")
-        preamble = etree.SubElement(article, "preamble")
-        preamble.text = self.extractFileName()
-        titre = etree.SubElement(article, "titre")
-        titre.text = self.extractTitle()
-        abstract = etree.SubElement(article, "abstract")
-        abstract.text = self.extractAbstract()
-        
-        return etree.tostring(article, pretty_print=True)
+        root = minidom.Document()
+        article = root.createElement("Article")
+        root.appendChild(article)
+        preamble = root.createElement("preamble")
+        preamble.setAttribute("preamble", self.extractFileName())
+        article.appendChild(preamble)
+        titre = root.createElement("titre")
+        titre.setAttribute("titre", self.extractTitle())
+        article.appendChild(titre)
+        abstract = root.createElement("abstract")
+        abstract.setAttribute("abstract", self.extractAbstract())
+        article.appendChild(abstract)
+        self.content = root.toprettyxml(indent ="\t") 
+        return self
