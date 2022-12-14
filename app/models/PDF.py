@@ -5,7 +5,7 @@ from common.runPDFtoText import TEMP_FILE_PATH, runPDFtoText
 import os
 import re
 
-from xml.etree.cElementTree import etree
+from xml.etree import ElementTree as etree
 
 class PDF(File):
     def __init__(self, path: str, file):
