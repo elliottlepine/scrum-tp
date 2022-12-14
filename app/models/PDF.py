@@ -152,5 +152,4 @@ class PDF(File):
         titre.text = self.extractTitle()
         abstract = etree.SubElement(article, "abstract")
         abstract.text = self.extractAbstract()
-        self.article = article
-        return self
+        return etree
