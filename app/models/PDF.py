@@ -16,6 +16,61 @@ class PDF(File):
     def read(path: str):
         return PDF(path, FileSystemAdapter.getInstance().read(path))
 
+    def getMaxHeight(self, block: str) -> int:
+        word_regex = r'\<word[\s\S]+?\>[\s\S]+?\<\/word\>'
+        max_height = 0
+
+        for word in re.findall(word_regex, block):
+            word_height_min = self.getWordHeight(word, min=True)
+            word_height_max = self.getWordHeight(word, min=False)
+            word_height = word_height_max - word_height_min
+            if word_height > max_height:
+                max_height = word_height
+
+        return max_height
+
+    def getWordHeight(self, word, *, min=True):
+        decimal_regex = r'(\d*[\.]\d*)'
+        height_max_regex = r'yMax=\"'
+        height_min_regex = r'yMin=\"'
+        regex = height_min_regex if min == True else height_max_regex
+        try:
+            height_tag = re.findall(regex + decimal_regex, word)
+            height = re.findall(decimal_regex, height_tag[0])
+        except Exception as e:
+            print(e)
+            return 0
+
+        return float(height[0])
+
+    ###
+    # Returns the title of the paper
+    ###
+    def extractTitle(self):
+        runPDFtoText(
+            SystemAdapter.getInstance().getArguments().input,
+            True
+        )
+
+        file = PDF.read(TEMP_FILE_PATH)
+
+        block_regex = r'\<block[\s\S]+?\>[\s\S]+?\<\/block\>'
+        blocks = re.findall(block_regex, file.content)
+        max_height_block = 0
+        title_block = blocks[0]
+
+        for block in blocks[:3]:
+            block_max_height = self.getMaxHeight(block)
+            if max_height_block < block_max_height:
+                max_height_block = block_max_height
+                title_block = block
+
+        words = re.sub(r'<[\s\S]+?>', '', title_block)
+
+        file.delete()
+
+        return ' '.join(words.split())
+
     ###
     # Returns the file name
     ###
@@ -72,59 +127,60 @@ class PDF(File):
         return "\n".join(lines[startAbstract:endAbstract])
 
     ###
-    # Returns the title of the paper
+    # Returns corpus
     ###
-    def extractTitle(self):
-        runPDFtoText(
-            SystemAdapter.getInstance().getArguments().input,
-            True
-        )
+    def extractCorpus(self):
+        content = self.content
 
-        file = PDF.read(TEMP_FILE_PATH)
+        print(content)
 
-        block_regex = r'\<block[\s\S]+?\>[\s\S]+?\<\/block\>'
-        blocks = re.findall(block_regex, file.content)
-        max_height_block = 0
-        title_block = blocks[0]
+        # Split the text into lines
+        lines = content.split("\n")
 
-        for block in blocks[:3]:
-            block_max_height = self.getMaxHeight(block)
-            if max_height_block < block_max_height:
-                max_height_block = block_max_height
-                title_block = block
+        # Find the index of the first line of the abstract
+        startCorpus = None
+        for i, line in enumerate(lines):
+            if (
+                line.startswith("I. ")
+                or line.startswith("1 ")
+                or line.startswith("1. ")
+                or line.startswith("Introduction")
+            ):
+                startCorpus = i
+                break
 
-        words = re.sub(r'<[\s\S]+?>', '', title_block)
+        # If no lines start with "Abstract", return an empty string
+        if startCorpus is None:
+            return ""
 
-        file.delete()
+        # Find the index of the last line of the abstract
+        endCorpus = None
+        for i, line in enumerate(lines[startCorpus + 1:], startCorpus + 1):
+            if (
+                "Conclusion" in line
+                or "CONCLUSION" in line
+                or "Discussion" in line
+                or "DISCUSSION" in line
+            ):
+                endCorpus = i
+                break
 
-        return ' '.join(words.split())
+        # If no lines start with "I. " or "1 ", return an empty string
+        if endCorpus is None:
+            return ""
 
-    def getMaxHeight(self, block: str) -> int:
-        word_regex = r'\<word[\s\S]+?\>[\s\S]+?\<\/word\>'
-        max_height = 0
+        # Return the abstract block by concatenating the individual lines
+        corpus = ""
 
-        for word in re.findall(word_regex, block):
-            word_height_min = self.getWordHeight(word, min=True)
-            word_height_max = self.getWordHeight(word, min=False)
-            word_height = word_height_max - word_height_min
-            if word_height > max_height:
-                max_height = word_height
+        splittedCorpus = lines[startCorpus:endCorpus]
 
-        return max_height
+        for i, line in enumerate(splittedCorpus):
+            corpus += line + "\n"
 
-    def getWordHeight(self, word, *, min=True):
-        decimal_regex = r'(\d*[\.]\d*)'
-        height_max_regex = r'yMax=\"'
-        height_min_regex = r'yMin=\"'
-        regex = height_min_regex if min == True else height_max_regex
-        try:
-            height_tag = re.findall(regex + decimal_regex, word)
-            height = re.findall(decimal_regex, height_tag[0])
-        except Exception as e:
-            print(e)
-            return 0
+            if (line.endswith('.')):
+                corpus += "\n"
 
-        return float(height[0])
+        return corpus
 
     ###
     # Parses self.content and converts it to TXT
@@ -134,7 +190,8 @@ class PDF(File):
 
         content += self.extractFileName() + "\n\n"
         content += self.extractTitle() + "\n\n"
-        content += self.extractAbstract()
+        content += self.extractAbstract() + "\n\n"
+        content += self.extractCorpus()
 
         self.content = content
 
