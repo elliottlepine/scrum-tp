@@ -63,7 +63,8 @@ class PDF(File):
         preamble = etree.SubElement(article, "preamble")
         preamble.text = self.extractFileName(self)
         titre = etree.SubElement(article, "titre")
-        titre.text = self.
-        return None
+        abstract = etree.SubElement(article, "abstract")
+        abstract.text = self.extractAbstract(self)
+        
     
 
