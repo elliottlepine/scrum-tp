@@ -1,9 +1,29 @@
 import sys
 import subprocess
+import argparse
 
 
 class SystemAdapter:
     instance = None
+
+    def __init__(self):
+        parser = argparse.ArgumentParser(
+            description='Récupère des infos d\'un pdf')
+
+        action = parser.add_mutually_exclusive_group(required=True)
+
+        action.add_argument('-t', '--text', type=None, metavar='pdfFilename',
+                            help='Convertir au format text')
+        action.add_argument('-x', '--xml', metavar='pdfFilename',
+                            help='Convertir au format pdf')
+
+        action.add_argument('-i', '--input', type=None, metavar='inputPath',
+                            help="Chemin du fichier d'entrée")
+
+        action.add_argument('-o', '--output', metavar='outputPath',
+                            help="Chemin du fichier d'entrée")
+
+        self.args = vars(parser.parse_args())
 
     @staticmethod
     def getInstance():
@@ -14,6 +34,9 @@ class SystemAdapter:
 
     def getArgv(self):
         return sys.argv
+
+    def getArguments(self):
+        return self.args
 
     def runCommand(self, command: str):
         print(command)

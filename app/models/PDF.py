@@ -21,7 +21,8 @@ class PDF(File):
     def extractFileName(self):
         # basename va recuperer le dernier contenue du chemin indiqué par exemple ===> torres.pdf
         # argv[1] car on met le chemin vers le fichier pdf dans le premier argument
-        file_name = os.path.basename(SystemAdapter.getInstance().getArgv()[1])
+        file_name = os.path.basename(
+            SystemAdapter.getInstance().getArguments()['inputPath'])
         # file_name[0]===>torres
         tmpName = os.path.splitext(file_name)[0]
         # si eventuellement y a un espace il le transform en _
@@ -79,7 +80,7 @@ class PDF(File):
         SystemAdapter.getInstance().runCommand(
             PDFTOTEXT
             + " "
-            + SystemAdapter.getInstance().getArgv()[1]
+            + SystemAdapter.getInstance().getArguments['inputPath']
             + " "
             + TEMP_FILE_PATH
         )
