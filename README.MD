@@ -8,8 +8,11 @@ Elliott Lépine, Lyes Douki, Yacine Trousselle
 
 ## Lancer l'application
 
-L'application ne peut malheureusement pas être lancée pour le moment.
-
+```shell
+python3 ./app/index.py --text --input [chemin vers PDF] --ouput [chemin vers TXT]
+# OR
+python3 ./app/index.py --xml --input [chemin vers PDF] --ouput [chemin vers XML]
+```
 ## Compte rendu
 
 ### Analyse du besoin (17/11/2022 - 9h)
