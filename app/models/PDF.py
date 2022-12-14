@@ -3,6 +3,7 @@ from adapters.FileSystemAdapter import FileSystemAdapter
 from models.File import File
 import os
 
+from lxml import etree
 
 class PDF(File):
     @staticmethod
@@ -56,3 +57,13 @@ class PDF(File):
 
         # Return the abstract block by concatenating the individual lines
         return "\n".join(lines[startAbstract:endAbstract])
+
+    def toXML(self):
+        article = etree.Element("Article")
+        preamble = etree.SubElement(article, "preamble")
+        preamble.text = self.extractFileName(self)
+        titre = etree.SubElement(article, "titre")
+        titre.text = self.
+        return None
+    
+
