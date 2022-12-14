@@ -9,7 +9,6 @@ def main(args):
 
         runPDFtoText(args.input)
         file = recoverPDFtoTextOutput(args.output)
-
         file.toTXT().create()
 
     if args.xml:
