@@ -61,3 +61,13 @@ Elles ont été trasférées sur le sprint 3, en plus de la tâche de conversion
 Ces changements ont été reportés sur le Trello du projet.
 
 ![Trello sprint 3](./media/sprint3.png)
+
+### Rétrospective du sprint 3 et planification du sprint 4 (14/12/2022)
+
+Il restait 2 tickets du sprint 3 : la création de fichiers XML, et l'extraction de la bibliographie. Ils ont tous les 2 été passés sur le sprint 4.
+
+Des tickets concernant l'extraction de nouvelles informations et la création d'un menu ont été ajoutés au sprint 4 et répartis entre les différnts membres de l'équipe.
+
+Les changements ont été reportés sur le Trello du projet.
+
+![Trello sprint 4](./media/sprint4.png)
