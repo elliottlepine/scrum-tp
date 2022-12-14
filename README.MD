@@ -2,13 +2,22 @@
 
 Repo Github : https://github.com/elliottlepine/scrum-tp/tree/GL-1-Veille-techno-pdf2text
 
+Pour un confort optimal, visionner ce document à cette adresse : <https://github.com/elliottlepine/scrum-tp/blob/version-2/README.MD>
+
 Elliott Lépine, Lyes Douki, Yacine Trousselle
 
+## Lancer l'application
+
+```shell
+python3 ./app/index.py --text --input [chemin vers PDF] --ouput [chemin vers TXT]
+# OR
+python3 ./app/index.py --xml --input [chemin vers PDF] --ouput [chemin vers XML]
+```
 ## Compte rendu
 
 ### Analyse du besoin (17/11/2022 - 9h)
 
-Voir [comprehension.md](comprehension.md)
+Voir [https://github.com/elliottlepine/scrum-tp/blob/master/comprehension.md](comprehension.md)
 
 ### Planification Sprint 1 (17/11/2022)
 
@@ -20,7 +29,7 @@ Paramétrage du premier sprint.
 
 Tickets GL-1 et GL-2 à faire.
 
-Voir [backlog.md](backlog.md)
+Voir [https://github.com/elliottlepine/scrum-tp/blob/master/backlog.md](backlog.md)
 
 ### Rétrospective du sprint 1 et planification du sprint 2 (05/12/2022)
 
