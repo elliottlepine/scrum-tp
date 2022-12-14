@@ -5,6 +5,8 @@ from common.runPDFtoText import TEMP_FILE_PATH, runPDFtoText
 import os
 import re
 
+from xml.etree import ElementTree as root
+from xml.dom import minidom
 
 class PDF(File):
     def __init__(self, path: str, file):
@@ -126,6 +128,9 @@ class PDF(File):
         # Return the abstract block by concatenating the individual lines
         return "\n".join(lines[startAbstract:endAbstract])
 
+    
+    
+
     ###
     # Returns corpus
     ###
@@ -195,4 +200,20 @@ class PDF(File):
 
         self.content = content
 
+        return self
+
+    def toXML(self):
+        root = minidom.Document()
+        article = root.createElement("Article")
+        root.appendChild(article)
+        preamble = root.createElement("preamble")
+        preamble.setAttribute("preamble", self.extractFileName())
+        article.appendChild(preamble)
+        titre = root.createElement("titre")
+        titre.setAttribute("titre", self.extractTitle())
+        article.appendChild(titre)
+        abstract = root.createElement("abstract")
+        abstract.setAttribute("abstract", self.extractAbstract())
+        article.appendChild(abstract)
+        self.content = root.toprettyxml(indent ="\t") 
         return self

@@ -9,12 +9,13 @@ def main(args):
 
         runPDFtoText(args.input)
         file = recoverPDFtoTextOutput(args.output)
-
         file.toTXT().create()
 
     if args.xml:
         print('On récupère au format xml')
-
+        runPDFtoText(args.input)
+        file = recoverPDFtoTextOutput(args.output)
+        file.toXML().create()
 
 if __name__ == '__main__':
     main(SystemAdapter.getInstance().getArguments())
