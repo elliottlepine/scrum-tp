@@ -58,3 +58,25 @@ class File:
             return 0
 
         return float(height[0])
+
+    def get_biblio(self):
+        block_regex = r'\<block[\s\S]+?\>[\s\S]+?\<\/block\>'
+        word_regex = r'(<word xMin="(\d*[\.]\d*)" yMin="(\d*[\.]\d*)" xMax="(\d*[\.]\d*)" yMax="(\d*[\.]\d*)">(\.?[0-9]*)*references?</word>' \
+                     r'|<word xMin="(\d*[\.]\d*)" yMin="(\d*[\.]\d*)" xMax="(\d*[\.]\d*)" yMax="(\d*[\.]\d*)">(\.?[0-9]*)*r</word>\s+?' \
+                     r'<word xMin="(\d*[\.]\d*)" yMin="(\d*[\.]\d*)" xMax="(\d*[\.]\d*)" yMax="(\d*[\.]\d*)">(\.?[0-9]*)*eferences?</word>)'
+        ref_regex = r'<line xMin="(\d*[\.]\d*)" yMin="(\d*[\.]\d*)" xMax="(\d*[\.]\d*)" yMax="(\d*[\.]\d*)">\s+?' + word_regex + '\s+?</line>'
+        i = 0
+        ref_blocks = ''
+        blocks = re.findall(block_regex, self.content)
+
+        for block in blocks:
+            if re.findall(ref_regex, block, flags=re.IGNORECASE):
+                while i < len(blocks):
+                    ref_blocks = ref_blocks + blocks[i]
+                    i = i +1
+                continue
+            i = i + 1
+
+        words = re.sub(r'<[\s\S]+?>', '', ref_blocks)
+
+        return ' '.join(words.split())

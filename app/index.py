@@ -6,11 +6,10 @@ from models.PDF import PDF
 
 PDFTOTEXT = "pdftotext -raw"
 PDFTOTEXTTITLE = "pdftotext -bbox-layout -q -l 1"
+PDFTOTEXTBIBLIO = "pdftotext -bbox-layout"
 TEMP_FILE_PATH = "temp.txt"
 
-def run_pdftotext(bbox_option: bool = False) -> File:
-    command = PDFTOTEXTTITLE if bbox_option else PDFTOTEXT
-
+def run_pdftotext(command: str) -> File:
     TerminalAdapter.basic(
         SystemAdapter.getInstance().runCommand(
             command
@@ -26,7 +25,8 @@ def run_pdftotext(bbox_option: bool = False) -> File:
 
     return file
 
-run_pdftotext(True)
+file = run_pdftotext(PDFTOTEXTBIBLIO)
+print(file.get_biblio())
 
 FileSystemAdapter.getInstance().delete(TEMP_FILE_PATH)
 
