@@ -1,33 +1,21 @@
-from adapters.TerminalAdapter import TerminalAdapter
-from adapters.FileSystemAdapter import FileSystemAdapter
+from common.recoverPDFtoTextOutput import recoverPDFtoTextOutput
+from common.runPDFtoText import runPDFtoText
 from adapters.SystemAdapter import SystemAdapter
-from models.File import File
-from models.PDF import PDF
 
-PDFTOTEXT = "pdftotext -raw"
-PDFTOTEXTTITLE = "pdftotext -bbox-layout -q -l 1"
-PDFTOTEXTBIBLIO = "pdftotext -bbox-layout"
-TEMP_FILE_PATH = "temp.txt"
 
-def run_pdftotext(command: str) -> File:
-    TerminalAdapter.basic(
-        SystemAdapter.getInstance().runCommand(
-            command
-            + " "
-            + SystemAdapter.getInstance().getArgv()[1]
-            + " "
-            + TEMP_FILE_PATH
-        )
-    )
-    file = PDF.read(TEMP_FILE_PATH)
-    file.path = SystemAdapter.getInstance().getArgv()[2]
-    file.create()
+def main(args):
+    if args.text:
+        print('On récupère au format text')
 
-    return file
+        runPDFtoText(args.input)
+        file = recoverPDFtoTextOutput(args.output)
+        file.toTXT().create()
 
-file = run_pdftotext(PDFTOTEXTBIBLIO)
-print(file.get_biblio())
+    if args.xml:
+        print('On récupère au format xml')
+        runPDFtoText(args.input)
+        file = recoverPDFtoTextOutput(args.output)
+        file.toXML().create()
 
-FileSystemAdapter.getInstance().delete(TEMP_FILE_PATH)
-
-# print(file.extractAbstract())
+if __name__ == '__main__':
+    main(SystemAdapter.getInstance().getArguments())
