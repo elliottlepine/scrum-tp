@@ -311,10 +311,11 @@ class PDF(File):
         abstract = root.createElement("abstract")
         abstract.appendChild(root.createTextNode(self.extractAbstract()))
         article.appendChild(abstract)
-        self.content = root.toprettyxml(indent ="\t") 
+        
 
         intro = root.createElement("Introduction")
         intro.appendChild(root.createTextNode(self.extractIntroduction()))
         article.appendChild(intro)
         
+        self.content = root.toprettyxml(indent ="\t") 
         return self
