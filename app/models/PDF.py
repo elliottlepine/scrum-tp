@@ -346,5 +346,13 @@ class PDF(File):
         intro.appendChild(root.createTextNode(self.extractIntroduction()))
         article.appendChild(intro)
         
+        corpus = root.createElement("corpus")
+        corpus.appendChild(root.createTextNode(self.extractCorpus()))
+        article.appendChild(corpus)
+
+        bibliography = root.createElement("bibliography")
+        bibliography.appendChild(root.createTextNode(self.extractBiblio()))
+        article.appendChild(bibliography)
+        
         self.content = root.toprettyxml(indent ="\t") 
         return self
