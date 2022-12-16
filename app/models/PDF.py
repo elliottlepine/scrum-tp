@@ -8,6 +8,7 @@ import re
 from xml.etree import ElementTree as root
 from xml.dom import minidom
 
+
 class PDF(File):
     def __init__(self, path: str, file):
         super().__init__(path, file)
@@ -51,7 +52,6 @@ class PDF(File):
     def extractTitle(self):
         runPDFtoText(
             SystemAdapter.getInstance().getArguments().input,
-            True,
             True
         )
 
@@ -135,6 +135,7 @@ class PDF(File):
     ###
     # Returns corpus
     ###
+
     def extractCorpus(self):
         content = self.content
 
@@ -167,6 +168,7 @@ class PDF(File):
                 or "CONCLUSION" in line
                 or "Discussion" in line
                 or "DISCUSSION" in line
+                or "References" in line
             ):
                 endCorpus = i
                 break
@@ -188,6 +190,74 @@ class PDF(File):
 
         return corpus
 
+    def extractAuthors(self):
+        content = self.content
+
+        abstract = self.extractAbstract()
+        title = self.extractTitle()
+
+        lines = content.split(title)[1] if content.split(title) else ''
+        authors = lines.split(abstract)[0] if lines != '' and lines.split(abstract) else ''
+
+        return authors
+
+    ###
+    # Returns the conclusion of the paper
+    ###
+    def extractConclusion(self):
+        content = self.content
+
+        print(content)
+
+        # Split the text into lines
+        lines = content.split("\n")
+
+        # Find the index of the first line of the abstract
+        startConclusion = None
+        for i, line in enumerate(lines):
+            if (
+                "Conclusion" in line
+                or "CONCLUSION" in line
+                or "Conclusions" in line
+                or "CONCLUSIONS" in line
+            ):
+                startConclusion = i
+                break
+
+        # If no lines start with "Abstract", return an empty string
+        if startConclusion is None:
+            return ""
+
+        # Find the index of the last line of the abstract
+        endConclusion = None
+        for i, line in enumerate(lines[startConclusion + 1:], startConclusion + 1):
+            if (
+                "Acknowledgements" in line
+                or "ACKNOWLEDGMENT" in line
+                or "Acknowledgments" in line
+                or "Reference" in line
+
+            ):
+                endConclusion = i
+                break
+
+        # If no lines start with "I. " or "1 ", return an empty string
+        if endConclusion is None:
+            return ""
+
+        # Return the abstract block by concatenating the individual lines
+        conclusion = ""
+
+        splittedConclusion = lines[startConclusion:endConclusion]
+
+        for i, line in enumerate(splittedConclusion):
+            conclusion += line + "\n"
+
+            if (line.endswith('.')):
+                conclusion += "\n"
+
+        return conclusion
+
     ###
     # Parses self.content and converts it to TXT
     ###
@@ -196,6 +266,7 @@ class PDF(File):
 
         content += self.extractFileName() + "\n\n"
         content += self.extractTitle() + "\n\n"
+        content += self.extractAuthors() + "\n\n"
         content += self.extractAbstract() + "\n\n"
         content += self.extractCorpus()
 
@@ -207,12 +278,19 @@ class PDF(File):
         root = minidom.Document()
         article = root.createElement("Article")
         root.appendChild(article)
+
         preamble = root.createElement("preamble")
         preamble.appendChild(root.createTextNode(self.extractFileName()))
         article.appendChild(preamble)
+
         titre = root.createElement("titre")
         titre.appendChild(root.createTextNode(self.extractTitle()))
         article.appendChild(titre)
+
+        authors = root.createElement("auteur")
+        authors.setAttributes("auteur", self.extractAuthors())
+        article.appendChild(authors)
+
         abstract = root.createElement("abstract")
         abstract.appendChild(root.createTextNode(self.extractAbstract()))
         article.appendChild(abstract)
