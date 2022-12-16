@@ -129,8 +129,23 @@ class PDF(File):
         # Return the abstract block by concatenating the individual lines
         return "\n".join(lines[startAbstract:endAbstract])
 
-    
-    
+    #Introduction
+    def extractIntroduction(self):
+        contenue = self.content
+        lignesDucontenue = contenue.split('\n')
+        for i, uneLigne in enumerate(lignesDucontenue):
+            if(uneLigne.startswith("I.") or uneLigne.startswith("1.") or uneLigne.startswith("Introduction")):
+                 debutIntroduction = i
+                 break
+
+        finIntroduction = None
+        for i, uneLigne in enumerate(lignesDucontenue[debutIntroduction + 1:], debutIntroduction + 1): 
+            if(uneLigne.startswith("II.") or uneLigne.startswith("2.")):
+                finIntroduction = i
+                break
+ 
+ 
+        return "\n".join(lignesDucontenue[debutIntroduction:finIntroduction])
 
     ###
     # Returns corpus
@@ -288,11 +303,16 @@ class PDF(File):
         article.appendChild(titre)
 
         authors = root.createElement("auteur")
-        authors.setAttributes("auteur", self.extractAuthors())
+        authors.appendChild(root.createTextNode(self.extractAuthors()))
         article.appendChild(authors)
 
         abstract = root.createElement("abstract")
         abstract.appendChild(root.createTextNode(self.extractAbstract()))
         article.appendChild(abstract)
         self.content = root.toprettyxml(indent ="\t") 
+
+        intro = root.createElement("Introduction")
+        intro.appendChild(root.createTextNode(self.extractIntroduction()))
+        article.appendChild(intro)
+        
         return self
