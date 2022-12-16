@@ -166,8 +166,6 @@ class PDF(File):
     def extractCorpus(self):
         content = self.content
 
-        print(content)
-
         # Split the text into lines
         lines = content.split("\n")
 
@@ -223,8 +221,8 @@ class PDF(File):
         abstract = self.extractAbstract()
         title = self.extractTitle()
 
-        lines = content.split(title)[1] if content.split(title) else ''
-        authors = lines.split(abstract)[0] if lines != '' and lines.split(abstract) else ''
+        lines = content.split(title)[1] if len(content.split(title)) > 1 else ''
+        authors = lines.split(abstract)[0] if abstract != '' and len(lines.split(abstract)) > 1 else ''
 
         return authors
 
@@ -233,8 +231,6 @@ class PDF(File):
     ###
     def extractConclusion(self):
         content = self.content
-
-        print(content)
 
         # Split the text into lines
         lines = content.split("\n")
