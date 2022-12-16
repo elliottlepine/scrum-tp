@@ -283,6 +283,7 @@ class PDF(File):
         content += self.extractTitle() + "\n\n"
         content += self.extractAuthors() + "\n\n"
         content += self.extractAbstract() + "\n\n"
+        content += self.extractIntroduction() + "\n\n"
         content += self.extractCorpus()
 
         self.content = content
