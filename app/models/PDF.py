@@ -51,6 +51,7 @@ class PDF(File):
     def extractTitle(self):
         runPDFtoText(
             SystemAdapter.getInstance().getArguments().input,
+            True,
             True
         )
 
@@ -128,8 +129,36 @@ class PDF(File):
         # Return the abstract block by concatenating the individual lines
         return "\n".join(lines[startAbstract:endAbstract])
 
-    
-    
+
+    def extractBiblio(self):
+        runPDFtoText(
+            SystemAdapter.getInstance().getArguments().input,
+            True
+        )
+
+        file = PDF.read(TEMP_FILE_PATH)
+
+        block_regex = r'\<block[\s\S]+?\>[\s\S]+?\<\/block\>'
+        word_regex = r'(<word xMin="(\d*[\.]\d*)" yMin="(\d*[\.]\d*)" xMax="(\d*[\.]\d*)" yMax="(\d*[\.]\d*)">(\.?[0-9]*)*references?</word>' \
+                     r'|<word xMin="(\d*[\.]\d*)" yMin="(\d*[\.]\d*)" xMax="(\d*[\.]\d*)" yMax="(\d*[\.]\d*)">(\.?[0-9]*)*r</word>\s+?' \
+                     r'<word xMin="(\d*[\.]\d*)" yMin="(\d*[\.]\d*)" xMax="(\d*[\.]\d*)" yMax="(\d*[\.]\d*)">(\.?[0-9]*)*eferences?</word>)'
+        ref_regex = r'<line xMin="(\d*[\.]\d*)" yMin="(\d*[\.]\d*)" xMax="(\d*[\.]\d*)" yMax="(\d*[\.]\d*)">\s+?' + word_regex + '\s+?</line>'
+        i = 0
+        ref_blocks = ''
+        blocks = re.findall(block_regex, file.content)
+
+        for block in blocks:
+            if re.findall(ref_regex, block, flags=re.IGNORECASE):
+                while i < len(blocks):
+                    ref_blocks = ref_blocks + blocks[i]
+                    i = i +1
+                continue
+            i = i + 1
+
+        words = re.sub(r'(?!</line>)<[\s\S]+?>', '', ref_blocks)
+
+        return re.sub(r'</line>', '\n', ' '.join(words.split()))
+
 
     ###
     # Returns corpus
@@ -196,7 +225,8 @@ class PDF(File):
         content += self.extractFileName() + "\n\n"
         content += self.extractTitle() + "\n\n"
         content += self.extractAbstract() + "\n\n"
-        content += self.extractCorpus()
+        content += self.extractCorpus() + "\n\n"
+        content += self.extractBiblio()
 
         self.content = content
 
@@ -215,5 +245,8 @@ class PDF(File):
         abstract = root.createElement("abstract")
         abstract.setAttribute("abstract", self.extractAbstract())
         article.appendChild(abstract)
-        self.content = root.toprettyxml(indent ="\t") 
+        biblio = root.createElement("biblio")
+        biblio.setAttribute("biblio", self.extractBiblio())
+        article.appendChild(biblio)
+        self.content = root.toprettyxml(indent ="\t")
         return self
