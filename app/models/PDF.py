@@ -148,6 +148,35 @@ class PDF(File):
  
         return "\n".join(lignesDucontenue[debutIntroduction:finIntroduction])
 
+    def extractBiblio(self):
+        runPDFtoText(
+            SystemAdapter.getInstance().getArguments().input,
+            True
+        )
+
+        file = PDF.read(TEMP_FILE_PATH)
+
+        block_regex = r'\<block[\s\S]+?\>[\s\S]+?\<\/block\>'
+        word_regex = r'(<word xMin="(\d*[\.]\d*)" yMin="(\d*[\.]\d*)" xMax="(\d*[\.]\d*)" yMax="(\d*[\.]\d*)">(\.?[0-9]*)*references?</word>' \
+                     r'|<word xMin="(\d*[\.]\d*)" yMin="(\d*[\.]\d*)" xMax="(\d*[\.]\d*)" yMax="(\d*[\.]\d*)">(\.?[0-9]*)*r</word>\s+?' \
+                     r'<word xMin="(\d*[\.]\d*)" yMin="(\d*[\.]\d*)" xMax="(\d*[\.]\d*)" yMax="(\d*[\.]\d*)">(\.?[0-9]*)*eferences?</word>)'
+        ref_regex = r'<line xMin="(\d*[\.]\d*)" yMin="(\d*[\.]\d*)" xMax="(\d*[\.]\d*)" yMax="(\d*[\.]\d*)">\s+?' + \
+            word_regex + '\s+?</line>'
+        i = 0
+        ref_blocks = ''
+        blocks = re.findall(block_regex, file.content)
+
+        for block in blocks:
+            if re.findall(ref_regex, block, flags=re.IGNORECASE):
+                while i < len(blocks):
+                    ref_blocks = ref_blocks + blocks[i]
+                    i = i + 1
+                continue
+            i = i + 1
+
+        words = re.sub(r'(?!</line>)<[\s\S]+?>', '', ref_blocks)
+
+        return re.sub(r'</line>', '\n', ' '.join(words.split()))
     ###
     # Returns corpus
     ###
@@ -212,8 +241,8 @@ class PDF(File):
         abstract = self.extractAbstract()
         title = self.extractTitle()
 
-        lines = content.split(title)[1] if content.split(title) else ''
-        authors = lines.split(abstract)[0] if lines != '' and lines.split(abstract) else ''
+        lines = content.split(title)[1] if len(content.split(title)) > 1 else ''
+        authors = lines.split(abstract)[0] if abstract != '' and len(lines.split(abstract)) > 1 else ''
 
         return authors
 
