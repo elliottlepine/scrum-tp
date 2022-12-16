@@ -129,7 +129,22 @@ class PDF(File):
         return "\n".join(lines[startAbstract:endAbstract])
 
     
-    
+    def extractIntroduction(self):
+        contenue = self.content
+        lignesDucontenue = contenue.split('\n')
+        for i, uneLigne in enumerate(lignesDucontenue):
+            if(uneLigne.startswith("I.") or uneLigne.startswith("1.") or uneLigne.startswith("Introduction")):
+                debutIntroduction = i
+                break
+
+        finIntroduction = None 
+        for i, uneLigne in enumerate(lignesDucontenue[debutIntroduction + 1:], debutIntroduction + 1): 
+            if(uneLigne.startswith("II.") or uneLigne.startswith("2.")):
+                finIntroduction = i
+                break
+ 
+ 
+        return "\n".join(lignesDucontenue[debutIntroduction:finIntroduction])
 
     ###
     # Returns corpus
@@ -196,7 +211,8 @@ class PDF(File):
         content += self.extractFileName() + "\n\n"
         content += self.extractTitle() + "\n\n"
         content += self.extractAbstract() + "\n\n"
-        content += self.extractCorpus()
+        content += self.extractCorpus() + "\n\n"
+        content += self.extractIntroduction() + "\n\n"
 
         self.content = content
 
@@ -207,13 +223,18 @@ class PDF(File):
         article = root.createElement("Article")
         root.appendChild(article)
         preamble = root.createElement("preamble")
-        preamble.setAttribute("preamble", self.extractFileName())
+        preamble.appendChild(root.createTextNode(self.extractFileName()))
         article.appendChild(preamble)
         titre = root.createElement("titre")
-        titre.setAttribute("titre", self.extractTitle())
+        titre.appendChild(root.createTextNode(self.extractTitle()))
         article.appendChild(titre)
         abstract = root.createElement("abstract")
-        abstract.setAttribute("abstract", self.extractAbstract())
+        abstract.appendChild(root.createTextNode(self.extractAbstract()))
         article.appendChild(abstract)
+        introduction = root.createElement("Introduction")
+        introduction.appendChild(root.createTextNode(self.extractIntroduction()))
+        article.appendChild(introduction)
         self.content = root.toprettyxml(indent ="\t") 
         return self
+
+    def extractIntroduction(self):
