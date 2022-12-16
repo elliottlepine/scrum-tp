@@ -52,7 +52,6 @@ class PDF(File):
     def extractTitle(self):
         runPDFtoText(
             SystemAdapter.getInstance().getArguments().input,
-            True,
             True
         )
 
@@ -167,6 +166,8 @@ class PDF(File):
     def extractCorpus(self):
         content = self.content
 
+        print(content)
+
         # Split the text into lines
         lines = content.split("\n")
 
@@ -215,6 +216,17 @@ class PDF(File):
                 corpus += "\n"
 
         return corpus
+
+    def extractAuthors(self):
+        content = self.content
+
+        abstract = self.extractAbstract()
+        title = self.extractTitle()
+
+        lines = content.split(title)[1] if content.split(title) else ''
+        authors = lines.split(abstract)[0] if lines != '' and lines.split(abstract) else ''
+
+        return authors
 
     ###
     # Returns the conclusion of the paper
@@ -281,6 +293,7 @@ class PDF(File):
 
         content += self.extractFileName() + "\n\n"
         content += self.extractTitle() + "\n\n"
+        content += self.extractAuthors() + "\n\n"
         content += self.extractAbstract() + "\n\n"
         content += self.extractCorpus() + "\n\n"
         content += self.extractConclusion() + "\n\n"
@@ -302,6 +315,10 @@ class PDF(File):
         titre = root.createElement("titre")
         titre.setAttribute("titre", self.extractTitle())
         article.appendChild(titre)
+
+        authors = root.createElement("auteur")
+        authors.setAttributes("auteur", self.extractAuthors())
+        article.appendChild(authors)
 
         abstract = root.createElement("abstract")
         abstract.setAttribute("abstract", self.extractAbstract())
