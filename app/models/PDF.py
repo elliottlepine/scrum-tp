@@ -133,6 +133,7 @@ class PDF(File):
     def extractIntroduction(self):
         contenue = self.content
         lignesDucontenue = contenue.split('\n')
+        debutIntroduction = None
         for i, uneLigne in enumerate(lignesDucontenue):
             if(uneLigne.startswith("I.") or uneLigne.startswith("1.") or uneLigne.startswith("Introduction")):
                  debutIntroduction = i
