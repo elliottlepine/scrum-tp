@@ -14,7 +14,9 @@ class SystemAdapter:
                             help="Chemin du fichier d'entrée")
 
         parser.add_argument('-o', '--output',
-                            help="Chemin du fichier d'entrée")
+                            help="Chemin du fichier de sortie")
+
+        parser.add_argument('-m', '--menu', action='store_true', help='Sélection des fichiers via un menu')
 
         exclusiveGroup = parser.add_mutually_exclusive_group(required=True)
 

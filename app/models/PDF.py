@@ -313,7 +313,7 @@ class PDF(File):
         article.appendChild(titre)
 
         authors = root.createElement("auteur")
-        authors.setAttributes("auteur", self.extractAuthors())
+        authors.setAttribute("auteur", self.extractAuthors())
         article.appendChild(authors)
 
         abstract = root.createElement("abstract")
