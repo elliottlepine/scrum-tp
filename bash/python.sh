@@ -1,8 +1,6 @@
 #!/bin/bash
 
-echo '' > test
-
 for pdf in $(ls CORPUS_TRAIN)
 do
-    python3 ../app/index.py ../CORPUS_TRAIN/${pdf} ../CORPUS_TEXT/${pdf}.txt >> test
+    python3 app/index.py -t -i CORPUS_TRAIN/${pdf} -o CORPUS_TEXT/${pdf}.txt
 done

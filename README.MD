@@ -13,6 +13,17 @@ python3 ./app/index.py --text --input [chemin vers PDF] --ouput [chemin vers TXT
 # OR
 python3 ./app/index.py --xml --input [chemin vers PDF] --ouput [chemin vers XML]
 ```
+
+### Options
+
+```
+-t / --text : Convertir au format TXT
+-x / --xml : Convertir au format XML
+-i / --input : Chemin vers le fichier d'entrée
+-o / --output : Chemin vers le fichier de sortie
+-m / -menu : Sélectionner les fichiers via un menu
+```
+
 ## Compte rendu
 
 ### Analyse du besoin (17/11/2022 - 9h)
@@ -61,3 +72,13 @@ Elles ont été trasférées sur le sprint 3, en plus de la tâche de conversion
 Ces changements ont été reportés sur le Trello du projet.
 
 ![Trello sprint 3](./media/sprint3.png)
+
+### Rétrospective du sprint 3 et planification du sprint 4 (14/12/2022)
+
+Il restait 2 tickets du sprint 3 : la création de fichiers XML, et l'extraction de la bibliographie. Ils ont tous les 2 été passés sur le sprint 4.
+
+Des tickets concernant l'extraction de nouvelles informations et la création d'un menu ont été ajoutés au sprint 4 et répartis entre les différents membres de l'équipe.
+
+Les changements ont été reportés sur le Trello du projet.
+
+![Trello sprint 4](./media/sprint4.png)
